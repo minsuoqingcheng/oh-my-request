@@ -12,7 +12,7 @@ public class ProxyTest {
     @Test
     public void testGoogle() {
         String body = Request.get("https://google.com")
-                .useProxy("127.0.0.1", 1087)
+                .useProxy("23.106.138.59", 443)
                 .body();
         System.out.println(body);
     }

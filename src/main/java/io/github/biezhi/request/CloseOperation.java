@@ -31,7 +31,7 @@ public abstract class CloseOperation<V> extends Operation<V> {
 
     @Override
     protected void done() throws IOException {
-        if (closeable instanceof Flushable)
+        if (closeable instanceof Flushable)     //有些类同时实现Closeable接口和Flushable接口
             ((Flushable) closeable).flush();
         if (ignoreCloseExceptions)
             try {

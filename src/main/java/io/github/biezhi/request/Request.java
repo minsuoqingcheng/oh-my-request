@@ -1974,31 +1974,7 @@ public final class Request {
         return this;
     }
 
-    /**
-     * Write reader to request body
-     * <p>
-     * The given reader will be closed once sending completes
-     *
-     * @param input
-     * @return this request
-     * @throws RequestException
-     */
-    public Request send(final Reader input) throws RequestException {
-        try {
-            openOutput();
-        } catch (IOException e) {
-            throw new RequestException(e);
-        }
-        final Writer writer = new OutputStreamWriter(output,
-                output.getEncoder().charset());
-        return new FlushOperation<Request>(writer) {
 
-            @Override
-            protected Request run() throws IOException {
-                return copy(input, writer);
-            }
-        }.call();
-    }
 
     /**
      * Write char sequence to request body
@@ -2212,13 +2188,6 @@ public final class Request {
         return this;
     }
 
-    public Request useProxy(Proxy proxy) {
-        if (connection != null)
-            throw new IllegalStateException("The connection has already been created. This method must be called before reading or writing to the request.");
-
-        this.proxy = proxy;
-        return this;
-    }
 
     /**
      * Set whether or not the underlying connection should follow redirects in

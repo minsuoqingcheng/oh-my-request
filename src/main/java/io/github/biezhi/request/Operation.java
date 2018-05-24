@@ -43,6 +43,14 @@ public abstract class Operation<V> implements Callable<V> {
                 done();
             } catch (IOException e) {
                 if (!thrown)
+                /**
+                 * NOTE:
+                 *
+                 * Basically, finally clauses are there to ensure proper release of a resource.
+                 * However, if an exception is thrown inside the finally block, that guarantee goes away.
+                 * Worse, if your main block of code throws an exception, the exception raised in the finally block will hide it.
+                 * It will look like the error was cause by the call to done, not for the real reason.
+                 */
                     throw new RequestException(e);
             }
         }

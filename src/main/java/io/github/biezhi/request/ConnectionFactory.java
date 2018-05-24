@@ -28,6 +28,10 @@ public interface ConnectionFactory {
     /**
      * A {@link ConnectionFactory} which uses the built-in
      * {@link URL#openConnection()}
+     *
+     *
+     * penConnection返回值直接转为HttpsURLConnection，
+     * 这样可以使用一些Http连接特有的方法,如setRequestMethod
      */
     ConnectionFactory DEFAULT = new ConnectionFactory() {
         public HttpURLConnection create(URL url) throws IOException {
